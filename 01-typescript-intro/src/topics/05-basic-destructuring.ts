@@ -1,11 +1,13 @@
-
-
+/**
+ * Interfaces para un reproductor de audio.
+ */
 interface AudioPlayer {
   audioVolume: number;
   songDuration: number;
   songTitle: string;
   details:{};
 }
+
 interface Details {
   author: string;
   year: number;
@@ -21,9 +23,9 @@ const audioPlayer: AudioPlayer = {
   }
 };
 
-
 console.log('Audio Player', audioPlayer);
 
+// Desestructuración de objetos
 const { audioVolume, songDuration, songTitle, details } = audioPlayer;
 const { author } = details as Details;
 
@@ -32,8 +34,8 @@ console.log('Song Duration', songDuration);
 console.log('Song Title', songTitle);
 console.log('Author', author);
 
-
-const  dbz: string[] = ['Goku', 'Vegeta', 'Trunks'];
+// Desestructuración de arreglos
+const dbz: string[] = ['Goku', 'Vegeta', 'Trunks'];
 const [ p1, p2, p3 ] = dbz;
 
 console.log('Personaje 1:', p1);
