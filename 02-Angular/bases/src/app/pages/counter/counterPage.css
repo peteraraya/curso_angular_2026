@@ -1,0 +1,25 @@
+ h1 {
+   color: #000000;
+   text-align: center;
+ }
+
+ .counter {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 1rem;
+   font-size: 2rem;
+   color: #041680;
+
+ }
+
+ button {
+   background-color: #000000;
+   color: #ffffff;
+   border: none;
+   padding: 0.5rem 1rem;
+   font-size: 1rem;
+   border-radius: 0.25rem;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+ }

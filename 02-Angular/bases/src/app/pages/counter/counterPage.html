@@ -1,0 +1,26 @@
+<!-- Título del componente -->
+<h1>CounterPageComponent</h1>
+
+<!--
+  Data Binding / Interpolación tradicional:
+  Muestra el valor de la propiedad 'counter'.
+-->
+<h4 class="counter">Counter: {{ counter }}</h4>
+
+<!--
+  Interpolación de una Señal (Signal):
+  Nota que a diferencia de las propiedades tradicionales, la señal se invoca con () para obtener su valor.
+-->
+<h4 class="counter">Counter Signal: {{ counterSignal() }}</h4>
+
+<!--
+  Event Binding (Enlace de eventos):
+  Al hacer click en el botón, se ejecutan las funciones definidas en el controlador de TypeScript (.ts).
+-->
+<button (click)="increaseBy(1)">+1</button>
+<!-- Podemos usar la misma función pasando valores negativos para restar -->
+<button (click)="increaseBy(-1)">-1</button>
+<button (click)="increaseBy(5)">+5</button>
+
+<!-- Botón para resetear todos los valores a 0 -->
+<button (click)="resetCounter()">reset</button>

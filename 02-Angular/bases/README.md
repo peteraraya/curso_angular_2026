@@ -2,70 +2,103 @@
 
 Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 22.0.7.
 
-Esta sección está diseñada como apuntes para el curso, explicando detalladamente la estructura de directorios y archivos de un proyecto en Angular para entender cómo funciona "por debajo".
+Esta sección está diseñada como una **guía definitiva y apuntes exhaustivos** para el curso, documentando absolutamente todos los archivos y directorios del proyecto, de modo que puedas comprender exactamente qué hace cada pieza de tu aplicación Angular.
 
 ---
 
-## 📁 Estructura de Directorios y Archivos
+## 📁 Estructura Completa del Proyecto
 
-Al crear un proyecto en Angular, el CLI genera una estructura de carpetas y archivos predefinida. Como estudiante de Angular, es fundamental que entiendas para qué sirve cada uno:
+Al crear un proyecto y avanzar en las clases, se va configurando una estructura. A continuación se documenta **todo el contenido actual del proyecto**, directorio por directorio:
 
-### Directorios Principales
+### 1. Raíz del Proyecto (Archivos de Configuración)
 
-*   **`node_modules/`**: Contiene todas las librerías y dependencias instaladas a través de `npm` (Node Package Manager) que Angular necesita para funcionar. **Nunca** se debe modificar manualmente ni subir al repositorio (ya viene ignorado en `.gitignore`).
-*   **`public/`**: (En versiones anteriores de Angular se llamaba `src/assets`). Aquí se colocan los archivos estáticos y recursos públicos de la aplicación, como imágenes, fuentes o el icono `favicon.ico`. Estos archivos se copian tal cual al compilar el proyecto.
-*   **`src/`**: Es la carpeta más importante. Aquí es donde escribirás el 99% de tu código fuente (componentes, servicios, interfaces, estilos, etc.).
+En la raíz se encuentran las configuraciones globales que permiten que tu entorno de trabajo, repositorios y compilador funcionen correctamente.
 
-### Dentro de la carpeta `src/`
+*   **`node_modules/`**: Directorio donde npm instala todas las dependencias y librerías externas que Angular requiere. **Nunca** se debe modificar manualmente y está excluido de Git.
+*   **`public/`**: (Reemplaza a `src/assets` en las nuevas versiones). Aquí alojas los archivos estáticos públicos (como `favicon.ico`, imágenes o fuentes). Al compilar el proyecto, Angular copia esta carpeta intacta a la carpeta final de despliegue.
+*   **`angular.json`**: El "cerebro" del Angular CLI. Configura los comandos de compilación (`build`), pruebas (`test`), servidor de desarrollo (`serve`), así como los estilos globales, scripts de terceros y los assets (recursos estáticos).
+*   **`package.json`**: El registro de tu proyecto para Node.js. Almacena metadatos del proyecto, scripts (ej. `npm run start`), e indica exactamente qué paquetes están instalados (dependencias y devDependencies).
+*   **`package-lock.json`**: Bloquea las versiones exactas de todos los paquetes instalados y de sus subdependencias, asegurando que cualquier otra persona que clone este repositorio instale las mismas versiones exactas en `node_modules/`.
+*   **`tsconfig.json`**: Archivo de configuración global del compilador de TypeScript. Define cómo debe traducirse tu código TypeScript a JavaScript (target, paths, strict mode, etc.).
+*   **`tsconfig.app.json`**: Extiende la configuración de `tsconfig.json` y la personaliza específicamente para compilar el código fuente de tu aplicación (la carpeta `src/`).
+*   **`tsconfig.spec.json`**: Extiende la configuración de `tsconfig.json` pero orientada a los archivos de pruebas (`.spec.ts`).
+*   **`.gitignore`**: Lista de archivos y directorios (ej. `node_modules`, `dist`) que Git debe ignorar para no subirlos al repositorio.
+*   **`.editorconfig`**: Archivo para unificar reglas de edición (como usar 2 espacios de indentación) independientemente del IDE (VS Code, WebStorm) que use cada programador.
+*   **`.prettierrc`**: Configuración de Prettier. Es una herramienta que formatea automáticamente el código para que todo el equipo mantenga el mismo estilo visual en los archivos (uso de comillas, puntos y comas, etc.).
+*   **`README.md`**: ¡Este archivo! La carta de presentación y documentación principal de tu proyecto.
 
-*   **`app/`**: Es el **corazón** de la aplicación. Aquí residen todos los componentes, servicios y rutas de tu aplicación Angular.
-    *   Generalmente encontrarás un componente raíz (el punto de partida de la interfaz), y a partir de aquí crearás subcarpetas para organizar los distintos módulos de tu aplicación.
-*   **`index.html`**: Es la única página HTML real del proyecto (ya que Angular crea aplicaciones tipo *Single Page Application - SPA*). Angular inyecta dinámicamente nuestra aplicación dentro de este archivo, usualmente dentro de una etiqueta como `<app-root>`.
-*   **`main.ts`**: Es el punto de entrada principal de la aplicación. Es el primer archivo TypeScript que se ejecuta y se encarga de "arrancar" (bootstrap) la aplicación Angular y montar el componente principal en el `index.html`.
-*   **`styles.css`** (o `.scss`): Archivo de hojas de estilo globales. Los estilos CSS que pongas aquí afectarán a toda la aplicación en general, a diferencia de los estilos propios de cada componente que son aislados.
+> **💡 Nota sobre el Código Fuente:** Todos los archivos principales `.ts` y plantillas `.html` de este proyecto cuentan con **comentarios didácticos y profesionales en línea (JSDoc)**. Puedes revisar el interior de archivos como `main.ts`, `app.ts` o `counterPage.ts` para entender línea por línea su propósito y sintaxis.
 
-### Archivos de Configuración en la Raíz
+---
 
-*   **`angular.json`**: Es el archivo de configuración central de Angular CLI. Aquí se define cómo se compila el proyecto, qué recursos (assets) incluir, la configuración de diferentes entornos (desarrollo, producción) y estilos globales.
-*   **`package.json`**: Archivo de configuración fundamental de Node.js. Lista las dependencias del proyecto (librerías que usa tu app), las dependencias de desarrollo y los "scripts" (comandos útiles como `npm start`).
-*   **`package-lock.json`**: Asegura que las versiones exactas de las dependencias instaladas en `node_modules/` sean las mismas para cualquier otra persona que clone el proyecto.
-*   **`tsconfig.json`**, **`tsconfig.app.json`**, **`tsconfig.spec.json`**: Archivos de configuración de TypeScript. Le indican al compilador cómo el código escrito en TypeScript debe ser transpilado (convertido) a JavaScript estándar para que el navegador lo pueda entender.
-    *   `tsconfig.app.json`: Configuración específica para el código de la aplicación.
-    *   `tsconfig.spec.json`: Configuración específica para los archivos de pruebas (testing).
-*   **`.gitignore`**: Archivo de Git que especifica qué archivos y carpetas se deben ignorar y no subir al repositorio de código (como la pesada carpeta `node_modules/` o la carpeta de compilación).
-*   **`.editorconfig`**: Ayuda a mantener una consistencia en la configuración del editor de código (como VS Code) entre diferentes desarrolladores que trabajen en el proyecto (ej. tamaño de las tabulaciones).
-*   **`.prettierrc`**: Configuración para Prettier, una herramienta que formatea el código automáticamente para mantener un estilo limpio, estandarizado y legible.
+### 2. Directorio Fuente: `src/`
+
+La carpeta `src/` (Source) contiene el código real de tu aplicación. 
+
+*   **`index.html`**: El documento HTML principal. Como Angular hace aplicaciones SPA (Single Page Application), todo el proyecto ocurre en esta única página. Contiene la etiqueta `<app-root>` (u otra principal) donde Angular inyectará todos tus componentes dinámicamente.
+*   **`main.ts`**: El punto de entrada a tu aplicación. Es el primer archivo de TypeScript que se ejecuta. Su función principal es el **Bootstrap** (arranque), que inicializa Angular e inserta tu componente principal en el `index.html`.
+*   **`styles.css`**: (o `.scss`). La hoja de estilos global. Todo lo que pongas aquí afectará visualmente a toda tu aplicación, sin importar en qué componente te encuentres.
+
+---
+
+### 3. El Corazón de la Aplicación: `src/app/`
+
+En las versiones modernas de Angular, trabajamos con **Componentes Standalone** (independientes) por lo que ya no es estrictamente necesario un archivo `app.module.ts`. Aquí es donde programas toda tu lógica.
+
+*   **`app.config.ts`**: Proveedor global de configuraciones. Aquí se registran elementos vitales de la aplicación usando funciones (ej. `provideRouter(routes)` para habilitar las rutas, o `provideBrowserGlobalErrorListeners()`).
+*   **`app.routes.ts`**: Aquí se define la navegación (el Router). Es un arreglo de objetos de configuración donde indicas, por ejemplo: _"Cuando la URL sea `/counter`, carga el componente `CounterPage`"_.
+*   **`app.ts`**: (El Componente Raíz o Root Component). Se declara la clase `App` usando el decorador `@Component`. 
+    *   **Importante:** En este archivo se incluye el `RouterOutlet`, la directiva de Angular que decide qué mostrar en la pantalla dependiendo de la URL (si estás en `/counter`, mostrará la página del contador).
+    *   Usa **Signals** (como `signal('Pedro Araya')`) para el manejo reactivo moderno de estados.
+*   **`app.html`**: La plantilla HTML del componente raíz `app.ts`. Define la estructura visual base de la aplicación (ej. una cabecera) y, vitalmente, incluye la etiqueta `<router-outlet>` donde se inyectarán las páginas.
+
+---
+
+### 4. Módulos y Páginas: `src/app/pages/`
+
+Una buena práctica en proyectos de Angular es separar las vistas completas (Páginas) de los pequeños componentes reutilizables (Botones, Tarjetas).
+
+#### 🔹 `pages/counter/`
+
+En esta carpeta hemos desarrollado la funcionalidad y la vista de un contador, que funciona como nuestra primera página funcional del curso.
+
+*   **`counterPage.ts`**: La lógica principal de la página. 
+    *   Es un componente documentado y decorado con `@Component`, enlazado a su HTML y CSS.
+    *   Contiene la clase `CounterPage`.
+    *   Implementa una **variable tradicional** (`counter = 10`) y un **Signal de Angular** (`counterSignal = signal(10)`), permitiendo entender ambas formas de gestionar la reactividad en el framework.
+    *   Contiene funciones/métodos asociados a eventos de usuario: `increaseBy()`, `descreaseBy()`, `multiplyBy()` y `resetCounter()`, los cuales interactúan simultáneamente con la variable regular y actualizan la señal (ej. `this.counterSignal.update(...)` y `.set(...)`).
+*   **`counterPage.html`**: El código HTML (template) exclusivo para el contador. Se asume que usa *Data Binding* o interpolación (ej. `{{ counter }}` y `{{ counterSignal() }}`) para mostrar la lógica del `counterPage.ts` y conecta los botones a las funciones a través de Event Binding (ej. `(click)="increaseBy(1)"`).
+*   **`counterPage.css`**: Archivo de estilos propios. Los selectores CSS que se definan aquí solo se aplicarán a `counterPage.html`, sin riesgo de romper el diseño de otras partes de la app, gracias al encapsulamiento automático de Angular.
 
 ---
 
 ## 🚀 Comandos Útiles de Angular CLI (Apuntes)
 
 ### Servidor de Desarrollo
-Para iniciar un servidor de desarrollo local y ver tu aplicación, ejecuta:
+Para iniciar un servidor local y probar tu app en vivo, ejecuta:
 ```bash
 ng serve
 ```
-Luego, abre tu navegador en `http://localhost:4200/`. La aplicación se recargará automáticamente cada vez que guardes cambios en tus archivos.
+Ve a `http://localhost:4200/`. El navegador se recargará automáticamente al detectar cambios.
 
-### Generación de Código
-Angular CLI incluye herramientas para crear la estructura de nuevos elementos rápidamente (scaffolding):
+### Generación de Código (Scaffolding)
+Para evitar crear los archivos (`.ts`, `.html`, `.css`) manualmente, usamos Angular CLI:
 ```bash
-# Para crear un nuevo componente:
-ng generate component nombre-del-componente
+# Crear un nuevo componente (se recomienda generarlos en carpetas ordenadas):
+ng generate component pages/home
 
 # Forma abreviada:
-ng g c nombre-del-componente
+ng g c pages/home
 ```
-*(Puedes generar componentes, servicios, pipes, directivas, etc.)*
 
 ### Compilación (Build)
-Para compilar el proyecto y prepararlo para producción:
+Cuando termines el curso y quieras publicar la web:
 ```bash
 ng build
 ```
-Esto creará una carpeta `dist/` en la raíz de tu proyecto con los archivos HTML, CSS y JS completamente optimizados y listos para ser subidos a un servidor web.
+Generará la carpeta `dist/` en tu proyecto, conteniendo todo minificado y empaquetado para subirse al servidor de producción.
 
 ### Pruebas (Testing)
-Para ejecutar pruebas unitarias:
+Para probar si tu código funciona (Angular suele venir configurado con Jasmine/Karma o Vitest en versiones recientes):
 ```bash
 ng test
