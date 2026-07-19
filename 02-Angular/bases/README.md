@@ -62,13 +62,20 @@ Una buena práctica en proyectos de Angular es separar las vistas completas (Pá
 
 En esta carpeta hemos desarrollado la funcionalidad y la vista de un contador, que funciona como nuestra primera página funcional del curso.
 
-*   **`counterPage.ts`**: La lógica principal de la página. 
+*   **`counter-page.component.ts`**: (Anteriormente `counterPage.ts`). La lógica principal de la página. 
     *   Es un componente documentado y decorado con `@Component`, enlazado a su HTML y CSS.
-    *   Contiene la clase `CounterPage`.
-    *   Implementa una **variable tradicional** (`counter = 10`) y un **Signal de Angular** (`counterSignal = signal(10)`), permitiendo entender ambas formas de gestionar la reactividad en el framework.
-    *   Contiene funciones/métodos asociados a eventos de usuario: `increaseBy()`, `descreaseBy()`, `multiplyBy()` y `resetCounter()`, los cuales interactúan simultáneamente con la variable regular y actualizan la señal (ej. `this.counterSignal.update(...)` y `.set(...)`).
-*   **`counterPage.html`**: El código HTML (template) exclusivo para el contador. Se asume que usa *Data Binding* o interpolación (ej. `{{ counter }}` y `{{ counterSignal() }}`) para mostrar la lógica del `counterPage.ts` y conecta los botones a las funciones a través de Event Binding (ej. `(click)="increaseBy(1)"`).
-*   **`counterPage.css`**: Archivo de estilos propios. Los selectores CSS que se definan aquí solo se aplicarán a `counterPage.html`, sin riesgo de romper el diseño de otras partes de la app, gracias al encapsulamiento automático de Angular.
+    *   Implementa una **variable tradicional** y un **Signal de Angular** permitiendo entender ambas formas de gestionar la reactividad en el framework.
+*   **`counter-page.component.html`**: El código HTML exclusivo para el contador, donde se utiliza interpolación y Event Binding.
+
+#### 🔹 `pages/hero/`
+
+Nueva sección del curso donde aprendemos conceptos más avanzados sobre manipulación de Signals y formatos.
+
+*   **`hero-page.component.ts`**: Componente donde exploramos:
+    *   **Signals Computados (`computed`)**: Funciones que escuchan otras señales y reaccionan a sus cambios automáticamente (ej. `heroDescription`).
+    *   **Pipes Nativos**: Importación directa de tuberías como `UpperCasePipe` para darle formato a textos.
+*   **`hero-page.component.html`**: Uso de interpolación para las señales computadas y ejemplo en vivo de cómo utilizar un Pipe directamente en el template HTML (`{{ name() | uppercase }}`).
+
 
 ---
 

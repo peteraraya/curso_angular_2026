@@ -7,11 +7,11 @@ import { ChangeDetectionStrategy, Component, signal } from "@angular/core";
  * como del uso reactivo mediante Signals en Angular.
  */
 @Component({
-  templateUrl: './counterPage.html',
-  styleUrl: './counterPage.css',
+  templateUrl: './counter-page.component.html',
+  styleUrl: './counter-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CounterPage {
+export class CounterPageComponent {
   /**
    * Estado del contador gestionado mediante una propiedad de clase tradicional.
    */

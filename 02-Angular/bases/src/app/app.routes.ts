@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
-import { CounterPage } from './pages/counter/counterPage';
+import { CounterPageComponent } from './pages/counter/counter-page.component';
+import { HeroPageComponent } from './pages/hero/hero-page.component';
 
 /**
  * Definición de las rutas de la aplicación.
@@ -10,6 +11,10 @@ import { CounterPage } from './pages/counter/counterPage';
 export const routes: Routes = [
   {
     path: 'counter',
-    component: CounterPage,
+    component: CounterPageComponent,
+  },
+  {
+    path: 'hero',
+    component: HeroPageComponent,
   }
 ];
