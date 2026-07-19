@@ -1,0 +1,42 @@
+<!--
+  Interpolación de señal:
+  Muestra el valor devuelto por la ejecución del signal name().
+-->
+<h1>{{ name() }}</h1>
+
+<dl>
+  <td>Nombre:</td>
+  <dd>{{ name() }}</dd>
+
+  <td>Edad:</td>
+  <dd>{{ age() }}</dd>
+
+  <td>Método:</td>
+  <!--
+    Interpolación de una señal computada:
+    A pesar de comportarse como un método estandar en la sintaxis,
+    'heroDescription()' es un valor en caché gestionado reactivamente por Angular.
+  -->
+  <dd>{{ heroDescription() }}</dd>
+
+  <td>Capitalizado:</td>
+  <!--
+    A continuación vemos 2 maneras de capitalizar texto:
+    1. Usando un Signal Computado creado en TypeScript (capitalizedName).
+    2. Usando un Pipe integrado de Angular (uppercase) directamente en el HTML.
+  -->
+  <!-- <dd>{{ capitalizedName() }}</dd> -->
+  <dd>{{ name() | uppercase }}</dd>
+</dl>
+
+<!--
+  Event Binding (Enlace de Eventos):
+  Ejecutan métodos del componente para mutar el estado reactivo.
+-->
+<button (click)="changeHero()" class="btn btn-primary mx-2">
+  Cambiar nombre
+</button>
+
+<button (click)="changeAge()" class="btn btn-primary">Cambiar edad</button>
+
+<button (click)="resetForm()" class="btn btn-primary mx-2">Reset</button>
