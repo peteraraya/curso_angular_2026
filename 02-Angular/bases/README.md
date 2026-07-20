@@ -76,6 +76,33 @@ Nueva sección del curso donde aprendemos conceptos más avanzados sobre manipul
     *   **Pipes Nativos**: Importación directa de tuberías como `UpperCasePipe` para darle formato a textos.
 *   **`hero-page.component.html`**: Uso de interpolación para las señales computadas y ejemplo en vivo de cómo utilizar un Pipe directamente en el template HTML (`{{ name() | uppercase }}`).
 
+#### 🔹 `pages/dragonball/`
+
+Nueva sección del curso donde aprendemos sobre listas, condicionales y control de flujo usando la nueva sintaxis de Angular.
+
+*   **`dragonball-page.component.ts`**: Componente donde exploramos:
+    *   **Signals e interfaces**: Creación de un array de objetos tipados (`Character`) envueltos en un `signal` y el uso de métodos de actualización (`update`).
+    *   **Computed Signals y Clases**: Uso de `computed` para retornar clases CSS dinámicamente según el estado de nuestras variables.
+    *   **NgClass**: Importación y uso de utilidades de `@angular/common` para aplicar clases condicionales.
+*   **`dragonball-page.component.html`**: Uso de la nueva sintaxis de control de flujo de Angular (`@for`, `@if`, `@else`):
+    *   **@for**: Para iterar sobre el signal `characters()` y generar una lista de elementos, usando `track` para optimización y variables locales como `$index`.
+    *   **@if / @else**: Para renderizar condicionalmente elementos del DOM (ej. validando el nivel de poder de un personaje).
+    *   **Class Binding**: Uso de utilidades directas de Angular como `[class.text-danger]="..."` para aplicar estilos de forma condicional.
+    *   **Event Binding y Referencias Locales**: Manejo de eventos `(click)`, `(change)` o `(input)` junto con referencias locales de template (ej. `#txtName`) para actualizar nuestros Signals de forma reactiva y simular un *two-way binding* manual.
+
+---
+
+### 5. Componentes Compartidos: `src/app/components/`
+
+Los componentes compartidos son elementos reutilizables que pueden ser importados en múltiples páginas o en el componente raíz (app) de la aplicación.
+
+#### 🔹 `components/shared/navbar/`
+
+Barra de navegación global de la aplicación.
+
+*   **`navbar.ts`**: Lógica del componente de navegación.
+    *   Importa y utiliza utilidades de enrutamiento nativas de Angular: `RouterLink` y `RouterLinkActive`.
+*   **`navbar.html`**: Plantilla de la barra de navegación que hace uso de la directiva `routerLink` para navegar de forma instantánea sin recargar la página (comportamiento base de una SPA) y `routerLinkActive` para asignar clases CSS (como resaltados) a la ruta actualmente activa.
 
 ---
 
