@@ -93,10 +93,20 @@ El componente `DashboardPage` actúa como el **Layout** principal. Dentro de su 
 - `RouterLinkActive`: Asigna clases CSS (como `bg-blue-800`) automáticamente cuando la URL coincide con la del enlace activo, ideal para menús laterales o barras de navegación.
 
 ### 5. Control de Flujo (Nueva Sintaxis `@for`)
-En `side-menu-options.html`, implementamos la sintaxis moderna de Angular (introducida en Angular 17) para iterar arreglos:
+En `side-menu-options.html` y en `list.html`, implementamos la sintaxis moderna de Angular (introducida en Angular 17) para iterar arreglos:
 ```html
 @for (item of menuOptions; track item.route) {
   <!-- Renderizado dinámico del elemento -->
 }
 ```
-El uso de `track` mejora considerablemente el rendimiento, ayudando al DOM virtual a saber qué elementos se han añadido, modificado o eliminado, utilizando un identificador único (como `item.route`).
+El uso de `track` mejora considerablemente el rendimiento, ayudando a Angular a saber qué elementos se han añadido, modificado o eliminado, utilizando un identificador único (como `item.route`).
+
+### 6. Signals y Reactividad Moderna
+Angular introdujo `Signals` como su nuevo modelo de reactividad.
+- En `TrendingPage`, creamos un signal con `gifs = signal(imageUrls);`. Esto envuelve nuestro estado en un contenedor reactivo que notifica a la vista únicamente cuando sus valores cambian, optimizando la detección de cambios (Change Detection).
+- Al consumirlo en la vista o en otros métodos, se invoca como una función: `gifs()`.
+
+### 7. Signal Inputs
+Utilizamos `input.required<T>()` en `List` y `ListItem` en lugar del clásico decorador `@Input()`.
+- Los Signal Inputs son una forma moderna, reactiva y segura en cuanto a tipos para recibir datos del componente padre.
+- Al usar `.required()`, Angular lanzará un error de compilación/ejecución si el componente padre no envía esta propiedad (por ejemplo, omitiendo `[imageUrl]="gif"` en `<gifs-list-item>`), asegurando así que los componentes siempre tengan los datos necesarios para funcionar.

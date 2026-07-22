@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ListItem } from "./list-item/list-item";
 
 /**
@@ -11,4 +11,10 @@ import { ListItem } from "./list-item/list-item";
   imports: [ListItem],
   templateUrl: './list.html',
 })
-export class List {}
+export class List {
+  // Signal Input: Una forma moderna de recibir datos desde el componente padre.
+  // Es reactivo por defecto (al ser un signal) y obligatorio (required).
+  // Solo se puede enlazar usando property binding en el padre: [gifs]="...".
+  gifs = input.required<string[]>();
+
+}

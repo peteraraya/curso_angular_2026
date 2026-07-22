@@ -1,5 +1,7 @@
 <!-- Sección principal de Trending Gifs -->
 <section class="py-5">
     <!-- Componente anidado: renderiza la lista de Gifs usando <gifs-list> -->
-    <gifs-list />
+    <!-- Property Binding: [gifs]="gifs()" le pasa el valor actual de la signal 'gifs'
+         hacia el Signal Input (input.required) que define el componente <gifs-list> -->
+    <gifs-list [gifs]="gifs()" />
 </section>

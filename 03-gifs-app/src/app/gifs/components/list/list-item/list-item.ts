@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 /**
  * ListItem Component:
@@ -10,4 +10,9 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './list-item.html',
 })
-export class ListItem {}
+export class ListItem {
+  // Signal Input: Recibe la URL de la imagen desde el componente padre (<gifs-list>).
+  // Es obligatorio (required), lo que asegura que el componente no se pueda usar sin proveer [imageUrl].
+  imageUrl = input.required<string>();
+
+}

@@ -1,9 +1,12 @@
 <!-- Contenedor Grid usando TailwindCSS para mostrar los elementos -->
 <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
-  <!-- Aquí utilizamos el componente independiente (Standalone Component) ListItem.
-       Este componente se importó en el archivo list.ts de este componente. -->
-  <gifs-list-item />
-  <gifs-list-item />
-  <gifs-list-item />
-  <gifs-list-item />
+  <!-- Nueva sintaxis @for para iterar elementos.
+       Se invoca 'gifs()' porque 'gifs' es un Signal Input que contiene la lista. -->
+  @for (gif of gifs(); track gif){
+    <!-- Utilizamos el Standalone Component ListItem.
+         Property Binding: [imageUrl]="gif" pasa la URL actual de la iteración
+         hacia el Signal Input definido en el componente <gifs-list-item>. -->
+    <gifs-list-item [imageUrl]="gif" />
+  }
+
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { List } from "../../components/list/list";
 const imageUrls: string[] = [
     "https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg",
@@ -25,4 +25,10 @@ const imageUrls: string[] = [
   imports: [List],
   templateUrl: './trending-page.html',
 })
-export default class TrendingPage {}
+export default class TrendingPage {
+  // Signal: Una de las nuevas características de reactividad de Angular.
+  // Es un "envoltorio" reactivo alrededor de un valor (en este caso el arreglo imageUrls)
+  // que permite notificar a la vista cuando cambia para re-renderizar eficientemente.
+  gifs = signal(imageUrls);
+
+}

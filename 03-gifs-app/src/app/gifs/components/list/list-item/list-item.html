@@ -1,6 +1,10 @@
 <div>
-    <!-- Por el momento, la imagen es estática. En el futuro, se utilizará 
-         Property Binding ([src]="...") para inyectar la URL del gif dinámicamente -->
-    <img class="h-auto max-w-full rounded-base" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg"
-        alt="">
+    <!-- Property Binding: [src]="imageUrl()"
+         Inyecta dinámicamente la URL de la imagen. 
+         Se llama como función imageUrl() porque es un Signal. -->
+    <img 
+        class="h-auto max-w-full rounded-base" 
+        [src]="imageUrl()"
+        alt=""
+        >
 </div>
