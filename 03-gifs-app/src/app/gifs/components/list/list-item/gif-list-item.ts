@@ -8,11 +8,14 @@ import { Component, input } from '@angular/core';
 @Component({
   selector: 'gifs-list-item',
   imports: [],
-  templateUrl: './list-item.html',
+  templateUrl: './gif-list-item.html',
 })
-export class ListItem {
-  // Signal Input: Recibe la URL de la imagen desde el componente padre (<gifs-list>).
-  // Es obligatorio (required), lo que asegura que el componente no se pueda usar sin proveer [imageUrl].
+export class GifsListItem {
+  /**
+   * Signal Input: Recibe la URL de la imagen desde el componente padre (<gifs-list>).
+   * Al ser `required()`, asegura en tiempo de compilación que este componente no se puede 
+   * utilizar en una plantilla sin proporcionarle la propiedad `[imageUrl]="..."`.
+   */
   imageUrl = input.required<string>();
 
 }
