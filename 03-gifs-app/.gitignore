@@ -8,8 +8,22 @@
 
 # Node
 /node_modules
-npm-debug.log
-yarn-error.log
+npm-debug.log*
+yarn-error.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-store
+
+# Angular cache
+/.angular/cache
+/.angular/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+!.env.template
 
 # IDEs and editors
 .idea/
@@ -29,16 +43,33 @@ yarn-error.log
 !.vscode/mcp.json
 .history/*
 
+# Testing & E2E
+/coverage
+/reports
+/cypress/videos/
+/cypress/screenshots/
+/playwright-report/
+/test-results/
+__screenshots__/
+testem.log
+
 # Miscellaneous
-/.angular/cache
 .sass-cache/
 /connect.lock
-/coverage
 /libpeerconnection.log
-testem.log
 /typings
-__screenshots__/
+*.log
 
 # System files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+Desktop.ini
+
+# Build tools & Cache
+/.nx/cache
+*.swp
