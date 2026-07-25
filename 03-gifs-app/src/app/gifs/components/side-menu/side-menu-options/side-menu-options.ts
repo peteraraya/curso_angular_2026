@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { GifsService } from '../../../services/gifs.service';
 
 
+/**
+ * Interfaz que define la estructura de una opción del menú lateral.
+ */
 interface MenuOptions {
+  /** Clase del ícono (ej. FontAwesome) a mostrar en el menú. */
   icon: string;
+  /** Título principal de la opción del menú. */
   label:string;
+  /** Ruta de navegación a la que apuntará el routerLink. */
   route: string;
+  /** Subtítulo o descripción corta de la opción. */
   subLabel:string;
 }
 
@@ -21,6 +29,16 @@ interface MenuOptions {
   templateUrl: './side-menu-options.html',
 })
 export class SideMenuOptions {
+
+  /**
+   * Inyectamos el servicio de Gifs para poder acceder al historial de búsquedas
+   * y mostrarlo dinámicamente en el menú lateral.
+   */
+  gifsService = inject(GifsService);
+  
+  /**
+   * Arreglo estático con las opciones principales de navegación del menú.
+   */
   menuOptions: MenuOptions[] = [
     {
       icon: 'fa-solid fa-chart-line',
