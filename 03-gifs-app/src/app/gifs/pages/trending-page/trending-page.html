@@ -1,7 +1,26 @@
 <!-- Sección principal de Trending Gifs -->
-<section class="py-5">
-    <!-- Componente anidado: renderiza la lista de Gifs usando <gifs-list> -->
-    <!-- Property Binding: [gifs]="gifs()" le pasa el valor actual de la signal 'gifs'
+<!-- <section class="py-5"> -->
+<!-- Componente anidado: renderiza la lista de Gifs usando <gifs-list> -->
+<!-- Property Binding: [gifs]="gifs()" le pasa el valor actual de la signal 'gifs'
          hacia el Signal Input (input.required) que define el componente <gifs-list> -->
-    <gifs-list [gifs]="gifs()" />
-</section>
+<!-- <gifs-list [gifs]="gifs()" /> -->
+<!-- </section> -->
+
+
+
+
+<div 
+    class=" h-screen  overflow-y-scroll grid grid-cols-2 md:grid-cols-4 gap-4 pt-5"
+    (scroll)="onScroll($event)"
+    #groupDiv
+    >
+    @for (group of gifsService.trendingGifGroup(); track $index){
+    <div class="grid gap-4">
+        @for (gif of group; track gif.id) {
+        <div>
+            <img class="h-full w-full rounded-base object-contain" [src]="gif.url" [alt]="gif.title">
+        </div>
+        }
+    </div>
+    }
+</div>

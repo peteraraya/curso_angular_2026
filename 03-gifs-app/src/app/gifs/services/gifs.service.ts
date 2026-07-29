@@ -28,9 +28,25 @@ export class GifsService {
     /**
      * Signal que indica si la petición de Gifs populares está en curso (estado de carga).
      */
-    trendingGifsLoading = signal(true);
+    trendingGifsLoading = signal(false);
 
 
+    private trendingPages = signal(0);
+
+    // [[gif,gif,gif],[gif,gif,gif],[gif,gif,gif], ]
+
+    trendingGifGroup = computed<Gif[][]>(() => {
+        const groups = [];
+
+        for (let i = 0; i < this.trendingGifs().length; i += 3) {
+            groups.push(this.trendingGifs().slice(i, i + 3))
+        }
+
+        // console.log(groups)
+
+        return groups;
+
+    })
 
     /**
      * Signal que mantiene el historial de búsquedas como un diccionario (clave-valor).
@@ -64,10 +80,10 @@ export class GifsService {
      */
     private loadLocalStorage() {
         if (typeof localStorage === 'undefined') return;
-        
+
         const history = localStorage.getItem('history');
         if (!history) return;
-        
+
         try {
             this.searchHistory.set(JSON.parse(history));
         } catch (error) {
@@ -81,10 +97,15 @@ export class GifsService {
      */
     loadTrendingGifs() {
 
+        if(this.trendingGifsLoading()) return;
+
+        this.trendingGifsLoading.set(true);
+
         this.http.get<GiphyResponse>(`${environment.giphyUrl}/gifs/trending`, {
             params: {
                 api_key: environment.gifsApikey,
                 limit: 20,
+                offset: this.trendingPages() * 20
             },
         }).subscribe((resp) => {
 
@@ -92,12 +113,18 @@ export class GifsService {
             const gifs = GifMapper.mapGiphyItemToGifArray(resp.data);
 
             // Actualizamos el signal con los nuevos gifs
-            this.trendingGifs.set(gifs);
+            this.trendingGifs.update(currentGifs => [
+                ...currentGifs,
+                ...gifs
+            ]);
+
+
+            this.trendingPages.update((page) => page + 1)
 
             // Cambiamos el estado de carga a falso
             this.trendingGifsLoading.set(false);
 
-            console.log(gifs);
+            // console.log(gifs);
         })
 
     }
@@ -121,9 +148,9 @@ export class GifsService {
 
             // Historial
             tap((items) => {
-                this.searchHistory.update((history) =>({
+                this.searchHistory.update((history) => ({
                     ...history,
-                    [query.toLowerCase()]:items,
+                    [query.toLowerCase()]: items,
                 }));
                 this.saveLocalStorage();
             })
@@ -147,9 +174,12 @@ export class GifsService {
      * @param query Término de búsqueda (clave) para buscar en el historial.
      * @returns Un arreglo de Gifs correspondientes a la búsqueda, o un arreglo vacío si no existe.
      */
-    getHistoryGifs( query:string ):Gif[]{
+    getHistoryGifs(query: string): Gif[] {
         return this.searchHistory()[query] ?? [];
     }
+
+
+
 }
 
 // Va trabajar como si fuera un singleton

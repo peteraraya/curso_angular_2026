@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 
 import { GifsService } from '../../services/gifs.service';
 import { GifsList } from "../../components/list/gif-list";
@@ -43,5 +43,37 @@ export default class TrendingPage {
    * actualizará la vista donde se esté enlazando `gifs()`.
    */
   gifs = computed( () => this.gifsService.trendingGifs());
+
+
+  scrollDivRef =  viewChild<ElementRef>('groupDiv')
+
+
+  onScroll( event: Event ){
+    // ? ya que hay un unto que no existe
+    const scrollDiv = this.scrollDivRef()?.nativeElement;
+
+    if(!scrollDiv) return;
+
+    const scrollTop = scrollDiv.scrollTop;
+
+    const clientHeight = scrollDiv.clientHeight;
+
+    const scrollHeight = scrollDiv.scrollHeight;
+
+
+
+    console.log({scrollTotal : scrollTop + clientHeight, scrollHeight});
+
+    const isAtBottom = scrollTop + clientHeight + 300  >= scrollHeight;
+
+    console.log({isAtBottom});
+
+
+    if(isAtBottom){
+      this.gifsService.loadTrendingGifs();
+    }
+  }
+
+
 
 }
